@@ -33,8 +33,12 @@ public class H2UserRepository implements UserRepository {
   }
 
   @Override
+  public Optional<User> findByName(String name) {
+    return userRepository.findByName(name);
+  }
+
+  @Override
   public User save(User entity) {
     return userRepository.save(entity);
   }
-
 }
