@@ -8,7 +8,6 @@ import com.controle.controle_gastos.domain.to.PageTO;
 import com.controle.controle_gastos.domain.to.PaginationTO;
 import com.controle.controle_gastos.domain.to.UserTO;
 import java.util.Optional;
-import org.springframework.dao.DataIntegrityViolationException;
 
 public class UserService {
 
@@ -27,7 +26,8 @@ public class UserService {
     Optional<User> userDB = userRepository.findByName(userTO.getName());
 
     if (userDB.isPresent()) {
-      throw new DomainException("The name " + userTO.getName() + " already exists.", ErrorCode.NAME_ALREADY_EXISTS);
+      throw new DomainException("The name " + userTO.getName() + " already exists.",
+          ErrorCode.NAME_ALREADY_EXISTS);
     }
 
     User user = User.builder()
@@ -36,13 +36,5 @@ public class UserService {
         .build();
 
     return userRepository.save(user);
-
-    /*
-    try {
-      return userRepository.save(user);
-    } catch (DataIntegrityViolationException e) {
-      throw new DomainException("The name " + userTO.getName() + " already exists.", ErrorCode.NAME_ALREADY_EXISTS);
-    }
-     */
   }
 }

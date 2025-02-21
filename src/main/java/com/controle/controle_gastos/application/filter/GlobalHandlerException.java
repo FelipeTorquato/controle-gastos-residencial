@@ -27,24 +27,16 @@ public class GlobalHandlerException {
     this.messageSource = messageSource;
   }
 
-//  @ExceptionHandler(DomainException.class)
-//  public ResponseEntity<ErrorResponse> handleDomainException(DomainException ex) {
-//    ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), ex.getCode());
-//    return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
-//  }
-
   @ExceptionHandler(value = {DomainException.class})
   @ResponseStatus(value = HttpStatus.BAD_REQUEST)
   public ErrorResponse domainException(DomainException ex) {
     logger.error(ex.getMessage());
 
-    // Log da causa do erro, se existir
     Throwable cause = ex.getCause();
     if (cause != null) {
       logger.error("Causa do erro: ", cause);
     }
 
-    // Retorna a resposta de erro usando ErrorResponse
     return new ErrorResponse(ex.getMessage(), ex.getCode());
   }
 
