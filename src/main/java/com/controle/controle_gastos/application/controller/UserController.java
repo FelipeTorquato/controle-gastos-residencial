@@ -5,6 +5,7 @@ import com.controle.controle_gastos.domain.exceptions.DomainException;
 import com.controle.controle_gastos.domain.service.UserService;
 import com.controle.controle_gastos.domain.to.PageTO;
 import com.controle.controle_gastos.domain.to.PaginationTO;
+import com.controle.controle_gastos.domain.to.SummaryResponseTO;
 import com.controle.controle_gastos.domain.to.UserTO;
 import jakarta.validation.Valid;
 import java.util.HashMap;
@@ -57,5 +58,10 @@ public class UserController {
   public ResponseEntity<Object> delete(@PathVariable long id) throws DomainException {
     userService.deleteUser(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping(value = "/summary", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<SummaryResponseTO> getSummary() throws DomainException {
+    return ResponseEntity.ok(userService.getSummary());
   }
 }

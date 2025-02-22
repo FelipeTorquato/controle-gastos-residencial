@@ -41,7 +41,7 @@ public class TransactionService {
     verifyIfUserCanRevenue(user.getRole().toString(), transactionTO.getType().toString());
 
     Transaction transaction = Transaction.builder()
-        .description(transactionTO.getDescription())
+        .description(transactionTO.getDescription().trim())
         .amount(transactionTO.getAmount())
         .type(transactionTO.getType())
         .user(user)

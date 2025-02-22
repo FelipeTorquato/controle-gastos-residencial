@@ -4,6 +4,7 @@ import com.controle.controle_gastos.domain.entity.User;
 import com.controle.controle_gastos.domain.repository.UserRepository;
 import com.controle.controle_gastos.domain.to.PageTO;
 import com.controle.controle_gastos.domain.to.PaginationTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,11 @@ public class H2UserRepository implements UserRepository {
     Page<User> users = userRepository.findAll(pageable);
     return new PageTO<>(users.getContent(), users.getTotalElements(), users.getNumber(),
         users.getSize());
+  }
+
+  @Override
+  public List<User> findAll() {
+    return userRepository.findAll();
   }
 
   @Override

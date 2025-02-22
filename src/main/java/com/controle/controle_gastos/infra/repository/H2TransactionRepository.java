@@ -4,6 +4,7 @@ import com.controle.controle_gastos.domain.entity.Transaction;
 import com.controle.controle_gastos.domain.repository.TransactionRepository;
 import com.controle.controle_gastos.domain.to.PageTO;
 import com.controle.controle_gastos.domain.to.PaginationTO;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +27,11 @@ public class H2TransactionRepository implements TransactionRepository {
     return new PageTO<>(transactions.getContent(), transactions.getTotalElements(),
         transactions.getNumber(),
         transactions.getSize());
+  }
+
+  @Override
+  public List<Transaction> findAll() {
+    return transactionRepository.findAll();
   }
 
   @Override
