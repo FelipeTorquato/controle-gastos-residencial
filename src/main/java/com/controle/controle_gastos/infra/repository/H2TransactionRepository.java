@@ -37,4 +37,9 @@ public class H2TransactionRepository implements TransactionRepository {
   public Transaction save(Transaction entity) {
     return transactionRepository.save(entity);
   }
+
+  @Override
+  public void delete(Transaction transaction) {
+    transactionRepository.delete(transaction);
+  }
 }

@@ -4,6 +4,7 @@ import com.controle.controle_gastos.domain.entity.TransactionType;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class TransactionTO {
 
   @NotNull
   @NotBlank
+  @Size(max = 256, message = "{validation.name.size.too_long}")
   private String description;
 
   @NotNull
@@ -28,5 +30,5 @@ public class TransactionTO {
   @NotNull
   private TransactionType type;
 
-  private Integer userId;
+  private Long userId;
 }

@@ -1,6 +1,7 @@
 package com.controle.controle_gastos.domain.service;
 
 import com.controle.controle_gastos.domain.entity.User;
+import com.controle.controle_gastos.domain.entity.UserRole;
 import com.controle.controle_gastos.domain.exceptions.DomainException;
 import com.controle.controle_gastos.domain.exceptions.ErrorCode;
 import com.controle.controle_gastos.domain.repository.UserRepository;
@@ -17,11 +18,11 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public PageTO<User> getAll(PaginationTO paginationTO) {
+  public PageTO<User> findAll(PaginationTO paginationTO) {
     return userRepository.findAll(paginationTO);
   }
 
-  public User getById(Long id) throws DomainException {
+  public User findById(Long id) throws DomainException {
     Optional<User> user = userRepository.findById(id);
     if (user.isEmpty()) {
       throw new DomainException("User not found", ErrorCode.USER_NOT_FOUND);
@@ -41,6 +42,7 @@ public class UserService {
     User user = User.builder()
         .name(userTO.getName())
         .age(userTO.getAge())
+        .role(userTO.getAge() >= 18 ? UserRole.ADULT : UserRole.MINOR)
         .build();
 
     return userRepository.save(user);
