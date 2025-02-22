@@ -4,6 +4,11 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Represents a page of data.
+ * It is used to return data from the database.
+ * @param <T>
+ */
 @Getter
 @Setter
 public class PageTO<T> {

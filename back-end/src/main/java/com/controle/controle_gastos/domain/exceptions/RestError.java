@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Used to return rest error messages to the client.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,6 +15,5 @@ import lombok.Setter;
 public class RestError {
 
   private String field;
-
   private String message;
 }

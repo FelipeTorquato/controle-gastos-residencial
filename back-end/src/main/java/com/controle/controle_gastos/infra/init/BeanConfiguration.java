@@ -7,6 +7,9 @@ import com.controle.controle_gastos.domain.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Class responsible for configuring the beans of the application.
+ */
 @Configuration
 public class BeanConfiguration {
 

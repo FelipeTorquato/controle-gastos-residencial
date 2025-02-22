@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * This class is used to return error messages to the client. It contains a code and a message, and
+ * a list of RestError objects.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

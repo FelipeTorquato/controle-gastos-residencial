@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Class used by the GlobalHandlerException to return the error message and code to the client.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

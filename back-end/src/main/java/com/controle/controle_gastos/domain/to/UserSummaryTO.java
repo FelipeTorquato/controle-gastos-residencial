@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * User Summary used to display the summary from a user and his revenue, expense and net balance.
+ */
 @Getter
 @Setter
 @NoArgsConstructor

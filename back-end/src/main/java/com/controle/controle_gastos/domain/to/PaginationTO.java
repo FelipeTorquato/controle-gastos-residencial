@@ -4,6 +4,10 @@ import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Represents the pagination parameters.
+ * It is used to paginate data from the database.
+ */
 @Getter
 @Setter
 public class PaginationTO {
