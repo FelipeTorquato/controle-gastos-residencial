@@ -41,4 +41,9 @@ public class H2UserRepository implements UserRepository {
   public User save(User entity) {
     return userRepository.save(entity);
   }
+
+  @Override
+  public void delete(User entity) {
+    userRepository.delete(entity);
+  }
 }

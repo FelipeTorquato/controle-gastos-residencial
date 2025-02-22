@@ -21,6 +21,14 @@ public class UserService {
     return userRepository.findAll(paginationTO);
   }
 
+  public User getById(Long id) throws DomainException {
+    Optional<User> user = userRepository.findById(id);
+    if (user.isEmpty()) {
+      throw new DomainException("User not found", ErrorCode.USER_NOT_FOUND);
+    }
+    return user.get();
+  }
+
   public User createUser(UserTO userTO) throws DomainException {
 
     Optional<User> userDB = userRepository.findByName(userTO.getName());
@@ -36,5 +44,14 @@ public class UserService {
         .build();
 
     return userRepository.save(user);
+  }
+
+  public void deleteUser(Long id) throws DomainException {
+    Optional<User> userDB = userRepository.findById(id);
+    if (userDB.isEmpty()) {
+      throw new DomainException("User not found", ErrorCode.USER_NOT_FOUND);
+    }
+    //delete all transactions from user
+    userRepository.delete(userDB.get());
   }
 }
