@@ -32,8 +32,8 @@ public class TransactionController {
 
   @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<PageTO<Transaction>> getAll(
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "10") int size
+      @RequestParam(name = "page", defaultValue = "0") int page,
+      @RequestParam(name = "size", defaultValue = "10") int size
   ) {
     PaginationTO paginationTO = new PaginationTO(page, size);
     Map<String, Object> params = new HashMap<>();
@@ -43,7 +43,7 @@ public class TransactionController {
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Transaction> getById(@Valid @PathVariable Long id) throws DomainException {
+  public ResponseEntity<Transaction> getById(@Valid @PathVariable("id") Long id) throws DomainException {
     return ResponseEntity.ok(transactionService.findById(id));
   }
 

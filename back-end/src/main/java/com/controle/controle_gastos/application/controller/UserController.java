@@ -34,8 +34,8 @@ public class UserController {
 
   @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<PageTO<User>> getAll(
-      @RequestParam(defaultValue = "0") int page,
-      @RequestParam(defaultValue = "10") int size
+      @RequestParam(name = "page", defaultValue = "0") int page,
+      @RequestParam(name = "size", defaultValue = "10") int size
   ) {
     PaginationTO paginationTO = new PaginationTO(page, size);
     Map<String, Object> params = new HashMap<>();
@@ -45,7 +45,7 @@ public class UserController {
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> getById(@Valid @PathVariable long id) throws DomainException {
+  public ResponseEntity<User> getById(@Valid @PathVariable("id") long id) throws DomainException {
     return ResponseEntity.ok(userService.findById(id));
   }
 
@@ -55,7 +55,7 @@ public class UserController {
   }
 
   @DeleteMapping(value = "/{id}")
-  public ResponseEntity<Object> delete(@PathVariable long id) throws DomainException {
+  public ResponseEntity<Object> delete(@PathVariable("id") long id) throws DomainException {
     userService.deleteUser(id);
     return ResponseEntity.noContent().build();
   }
