@@ -53,7 +53,6 @@ public class UserService {
     if (userDB.isEmpty()) {
       throw new DomainException("User not found", ErrorCode.USER_NOT_FOUND);
     }
-    //delete all transactions from user
     userRepository.delete(userDB.get());
   }
 }
