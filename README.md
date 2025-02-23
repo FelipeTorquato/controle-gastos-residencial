@@ -1,10 +1,13 @@
 # Residential Expense Control
 
-Web application designed to users manage residential expenses. It allows users to register, list and delete users, and also create and list transactions. The system is built using **Java 21**, **Spring Boot 3.4.3**, **Maven** for dependency management and an **H2 in-memory database**.
+Web application designed to users manage residential expenses. It allows users to register, list and delete users, and also create and list transactions. The system's back-end is built using **Java 21**, **Spring Boot 3.4.3**, **Maven** for dependency management and an **H2 in-memory database**. The front-end is developed using **React** with **TypeScript**. It interacts with the backend API using **Axios** to allow users to manage their expenses and transactions. The UI is built with **Bootstrap** for styling.
 
 ---
 
 ## Features
+
+### Back-End Features
+
 - **User Management**:
     - Create a new user.
     - List all users.
@@ -19,8 +22,82 @@ Web application designed to users manage residential expenses. It allows users t
     - Uses H2 in-memory database for easy setup.
     - Database console accessible at `/h2-console`.
 
+### Front-End Features
+
+- **User Interface**:
+  - **Navbar**: Navigation between Home, Users, Transactions and Summary page.
+  - **Home**: Displays two tables —Users and Transactions— each occupying half of the screen.
+  - **User Page**: Allows creating users.
+  - **Transaction Page**: Allows creating transactions.
+  - **Summary Page**: Displays a summary of users' financial data (revenue, expenses, and net balance).
+- **Design**:
+  - Built with **Bootstrap** for a clean layout.
+- **API Integration**:
+  - Uses **Axios** to interact with the back-end API.
+
 ---
 
+## Project Structure
+
+```bash
+controle_gastos-residencial/
+├── back-end/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/
+│   │   │   │       └── controle/
+│   │   │   │           └── controle_gastos/
+│   │   │   │               ├── application/
+│   │   │   │               │   ├── controller/
+│   │   │   │               │   ├── filter/
+│   │   │   │               │   └── swagger/
+│   │   │   │               ├── domain/
+│   │   │   │               │   ├── entity/
+│   │   │   │               │   ├── exceptions/
+│   │   │   │               │   ├── repository/
+│   │   │   │               │   ├── service/
+│   │   │   │               │   └── to/
+│   │   │   │               ├── infra/
+│   │   │   │               │   ├── init/
+│   │   │   │               │   └── repository/
+│   │   │   │               └── ControleDeGastosResidencialApplication.java
+│   │   │   └── resources/
+│   │   │       ├── static/
+│   │   │       └── application.properties
+│   ├── pom.xml
+│   └── README.md
+├── front-end/
+│   ├── public/
+│   ├── src/
+│   │   ├── assets/
+│   │   ├── components/
+│   │   │   ├── Navbar.tsx
+│   │   ├── pages/
+│   │   │   ├── Home.tsx
+│   │   │   ├── Home.css
+│   │   │   ├── User.tsx
+│   │   │   ├── User.css
+│   │   │   ├── Transaction.tsx
+│   │   │   ├── Transaction.css
+│   │   │   ├── Summary.tsx
+│   │   │   └── Summary.css
+│   │   ├── service/
+│   │   │   ├── userService.ts
+│   │   │   └── transactionService.ts
+│   │   ├── types.ts
+│   │   ├── App.tsx
+│   │   ├── App.css
+│   │   ├── main.tsx
+│   │   └── vite-env.d.ts
+│   ├── index.html
+│   ├── package.json
+│   ├── tsconfig.json
+│   └── vite.config.ts
+└── README.md
+```
+
+---
 ## API Documentation
 
 All endpoints are accessible under the base URL: `http://localhost:8080`.
@@ -30,14 +107,14 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 - **Create a User**:
   - **POST** `/v1/user`
   - Request Body:
-    ```
+    ```json
     {
         "name": "John Smith",
         "age": 23
     }
     ```
   - Response:
-    ```
+    ```json
     {
         "id": 1,
         "name": "John Smith",
@@ -49,7 +126,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 - **List all Users**:
   - **GET** `/v1/user`
   - Response:
-    ```
+    ```json
     {
         "content": [
             {
@@ -68,7 +145,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 - **Get User by ID**:
   - **GET** `/v1/user/{id}`
   - Response:
-    ```
+    ```json
     {
         "id": 1,
         "name": "John Smith",
@@ -83,7 +160,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 
 - **Get User Summary**:
   - Response:
-    ```
+    ```json
     {
         "userSummaries": [
             {
@@ -114,7 +191,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 - **Create Transaction**:
   - **POST** `/v1/transaction`
   - Request Body:
-    ```
+    ```json
     {
         "description": "Salary",
         "amount": 5000,
@@ -123,7 +200,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
     }
     ```
     - Response:
-    ```
+    ```json
     {
         "id": 1,
         "description": "Salary",
@@ -141,7 +218,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 - **List all Transactions**
   - **GET** `/v1/transaction`
   - Response:
-    ```
+    ```json
     {
         "content": [
             {
@@ -178,7 +255,7 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
 - **Get Transaction by ID**
   - **GET** `/v1/transaction/{id}`
   - Response:
-    ```
+    ```json
     {
         "id": 1,
         "description": "Salary",
@@ -192,6 +269,41 @@ All endpoints are accessible under the base URL: `http://localhost:8080`.
         }
     }
     ```
+
+---
+
+## Running Back-End
+
+The back-end application is designed to run directly from IDE and uses **Java 21**.
+
+1. Import the `back-end` folder into the IDE as Maven Project.
+2. Wait for the IDE to download all dependencies from `pom.xml` file.
+3. Locate the main class: `ControleDeGastosResidencialApplication.java` in the `src/main/java/com/controle/controle_gastos/ControleDeGastosResidencialApplication.java` directory.
+4. Run main class.
+5. The back-end will start and run on `http://localhost:8080`.
+6. Swagger can be used to test the API at `http://localhost:8080/swagger-ui/index.html`.
+7. Ensure the back-end is running before starting the front-end.
+
+---
+
+## Running Front-End
+
+The front-end is built using **React** and **TypeScript** and can be run independently.
+
+1. Enter front-end folder:
+   ```bash
+   git clone https://github.com/FelipeTorquato/controle-gastos-residencial
+   cd front-end
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start development server:
+   ```bash
+   npm run dev
+   ```
+4. Access application at `http://localhost:5173/`.
 
 ---
 
