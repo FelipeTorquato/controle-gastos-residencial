@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class UserSummaryTO {
-git 
+
   private Long userId;
   private String userName;
   private Integer userAge;
